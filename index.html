@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Audio AI Systems Inc. | AI-Powered Respiratory Health Diagnostics</title>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0A0E27;
+            --accent: #00FFA3;
+            --accent-dim: #00C97D;
+            --text: #E8E8E8;
+            --text-dim: #A0A0B0;
+            --bg-dark: #050810;
+            --card-bg: #0F1629;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'IBM Plex Mono', monospace;
+            background: var(--bg-dark);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+            letter-spacing: normal;
+        }
+
+        /* Animated background grid */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(90deg, rgba(0, 255, 163, 0.03) 1px, transparent 1px),
+                linear-gradient(rgba(0, 255, 163, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: -1;
+            animation: gridMove 20s linear infinite;
+        }
+
+        @keyframes gridMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            background: rgba(5, 8, 16, 0.85);
+            border-bottom: 1px solid rgba(0, 255, 163, 0.1);
+        }
+
+        nav {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-dim);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 6rem 2rem 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 20%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(0, 255, 163, 0.08) 0%, transparent 70%);
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.5; }
+            50% { transform: translate(-50%, -50%) scale(1.1); opacity: 0.8; }
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-family: 'DM Sans', sans-serif;
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            color: var(--text);
+            animation: fadeInUp 1s ease-out;
+            letter-spacing: -1px;
+        }
+
+        .hero h1 .highlight {
+            color: var(--accent);
+            display: inline-block;
+            position: relative;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+            color: var(--text-dim);
+            margin-bottom: 3rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            animation: fadeInUp 1s ease-out 0.2s both;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: var(--accent);
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1rem;
+            border-radius: 6px;
+            transition: all 0.3s;
+            animation: fadeInUp 1s ease-out 0.4s both;
+            border: 2px solid var(--accent);
+        }
+
+        .cta-button:hover {
+            background: transparent;
+            color: var(--accent);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 255, 163, 0.3);
+        }
+
+        /* Stats Bar */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: -3rem auto 6rem;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .stat-card {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 12px;
+            border: 1px solid rgba(0, 255, 163, 0.1);
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .stat-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-5px);
+        }
+
+        .stat-number {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--accent);
+            display: block;
+            margin-bottom: 0.5rem;
+            letter-spacing: -1px;
+        }
+
+        .stat-label {
+            color: var(--text-dim);
+            font-size: 0.9rem;
+        }
+
+        /* Content Sections */
+        section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 6rem 2rem;
+        }
+
+        h2 {
+            font-family: 'DM Sans', sans-serif;
+            font-size: clamp(2rem, 4vw, 2.8rem);
+            font-weight: 700;
+            margin-bottom: 3rem;
+            color: var(--text);
+            letter-spacing: -0.5px;
+        }
+
+        h2::before {
+            content: '// ';
+            color: var(--accent);
+            font-size: 0.8em;
+        }
+
+        /* Technology Grid */
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .tech-card {
+            background: var(--card-bg);
+            padding: 2.5rem;
+            border-radius: 12px;
+            border: 1px solid rgba(0, 255, 163, 0.1);
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tech-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent), transparent);
+            transform: scaleX(0);
+            transition: transform 0.3s;
+            transform-origin: left;
+        }
+
+        .tech-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-5px);
+        }
+
+        .tech-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .tech-card h3 {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 1rem;
+            letter-spacing: 0;
+        }
+
+        .tech-card p {
+            color: var(--text-dim);
+            line-height: 1.8;
+        }
+
+        /* Team Section */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .team-member {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 2rem;
+            border: 1px solid rgba(0, 255, 163, 0.1);
+            transition: all 0.3s;
+        }
+
+        .team-member:hover {
+            border-color: var(--accent);
+            transform: translateY(-5px);
+        }
+
+        .team-member h3 {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 0.5rem;
+            letter-spacing: 0;
+        }
+
+        .team-member .role {
+            color: var(--accent);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .team-member .bio {
+            color: var(--text-dim);
+            font-size: 0.85rem;
+            line-height: 1.6;
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid rgba(0, 255, 163, 0.1);
+            padding: 3rem 2rem;
+            text-align: center;
+            color: var(--text-dim);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.8rem;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+                margin-top: 2rem;
+            }
+
+            section {
+                padding: 4rem 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">Audio AI Systems</div>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#technology">Technology</a></li>
+                <li><a href="#team">Team</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Detecting Respiratory Disease from <span class="highlight">Breathing Sounds</span></h1>
+            <p class="hero-subtitle">AI-powered, smartphone-based diagnostics transforming respiratory health screening worldwide</p>
+        </div>
+    </section>
+
+    <div class="stats">
+        <div class="stat-card">
+            <span class="stat-number">256K+</span>
+            <span class="stat-label">PCR-Tested Patient Recordings</span>
+        </div>
+        <div class="stat-card">
+            <span class="stat-number">84%</span>
+            <span class="stat-label">Sensitivity/Specificity</span>
+        </div>
+        <div class="stat-card">
+            <span class="stat-number">0.93</span>
+            <span class="stat-label">AUC Score</span>
+        </div>
+    </div>
+
+    <section id="about">
+        <h2>About Us</h2>
+        <p style="color: var(--text-dim); font-size: 1.1rem; line-height: 1.8; max-width: 900px;">
+            Co-founded by University of Washington audio AI signal processing Professor Les Atlas, Audio AI Systems Inc. is pioneering breakthrough AI algorithms that identify various respiratory diseases through smartphone-recorded forced coughing sounds. We're building the future of diagnostics and disease surveillance with patented technology jointly owned with the University of Washington.
+        </p>
+        <p style="color: var(--text-dim); font-size: 1.1rem; line-height: 1.8; max-width: 900px; margin-top: 2rem;">
+            Our mission is to diagnose diseases like COVID-19, TB, flu, RSV, COPD, asthma, and lung cancer from the sound of coughs and breathing patterns. We're also developing a respiratory disease spread forecast system using cough surveillance testing to rapidly track and predict the emergence of both known and unknown pathogens.
+        </p>
+        
+        <div style="margin-top: 3rem; display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap;">
+            <img src="image1.jpeg" alt="MIT Sandbox Innovation Fund Program" style="max-width: 200px; height: auto; opacity: 0.9; transition: opacity 0.3s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.9'">
+            <img src="image2.png" alt="AI Technology" style="max-width: 200px; height: auto; opacity: 0.9; transition: opacity 0.3s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.9'">
+        </div>
+    </section>
+
+    <section id="technology">
+        <h2>Technology</h2>
+        <div class="tech-grid">
+            <div class="tech-card">
+                <h3>Patented AI Innovation</h3>
+                <p>Our Complex Clipping technique (US 2024/0281639 A1), co-developed with University of Washington, enables high-accuracy disease detection even with noisy real-world data. This breakthrough allows us to rapidly train models for multiple diseases from a single data capture point.</p>
+            </div>
+            <div class="tech-card">
+                <h3>Instant Results</h3>
+                <p>Transform diagnostic timelines from days to seconds. Our smartphone-based solution delivers immediate, preliminary assessments before invasive and costly lab tests, making respiratory health screening accessible to anyone, anywhere.</p>
+            </div>
+            <div class="tech-card">
+                <h3>Scalable Detection</h3>
+                <p>Our AI platform can identify indicators for multiple respiratory diseases including COVID-19, tuberculosis, influenza, RSV, COPD, asthma, and early-stage lung cancer — all from simple audio recordings of coughs and breathing.</p>
+            </div>
+            <div class="tech-card">
+                <h3>Disease Surveillance</h3>
+                <p>Beyond individual diagnosis, we're building population-level respiratory disease forecasting systems. By analyzing cough patterns across communities, we can detect and predict outbreaks of both known and emerging pathogens in real-time.</p>
+            </div>
+            <div class="tech-card">
+                <h3>Edge Computing</h3>
+                <p>Leverage advanced edge computing and smartphone processing to deliver AI-powered diagnostics without requiring cloud connectivity. Privacy-first architecture ensures patient data security while maintaining high performance.</p>
+            </div>
+            <div class="tech-card">
+                <h3>Massive Dataset</h3>
+                <p>Our algorithms are trained on 256,600+ PCR-tested patient recordings, providing robust performance across diverse populations and acoustic environments. Continuous learning from real-world data ensures ongoing improvement.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="team">
+        <h2>Team</h2>
+        <div class="team-grid">
+            <div class="team-member">
+                <h3>Prof. Les Atlas</h3>
+                <span class="role">Co-Founder / Chief AI Innovation Scientist</span>
+                <p class="bio">PhD in Electrical Engineering. Professor of Audio Signal Processing and AI at University of Washington. Author of pioneering work in CNN AI. Leading R&D of breakthrough audio analysis algorithms for medical diagnostics.</p>
+            </div>
+            <div class="team-member">
+                <h3>Amil Khanzada</h3>
+                <span class="role">Co-Founder / CEO</span>
+                <p class="bio">UC Berkeley Computer Science (top 5%). Former MBA/AI student at Berkeley. One Young World delegate. Leads partnerships, product strategy, market research, regulatory pathways, and funding initiatives.</p>
+            </div>
+        </div>
+    </section>
+
+
+    <footer>
+        <p>&copy; 2025 Audio AI Systems, Inc. All rights reser
